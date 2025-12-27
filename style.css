@@ -1,0 +1,513 @@
+/* --- VARIAVEIS E RESET --- */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --accent: #0f172a;
+    --text-main: #1e293b;
+    --text-light: #64748b;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --success: #16a34a;
+    
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    --radius-card: 16px;
+    --radius-btn: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* --- HERO SECTION (TOPO) --- */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+    color: white;
+    padding: 6rem 1.5rem 8rem; /* Padding bottom maior para o overlap */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    backdrop-filter: blur(4px);
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.hero p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Elemento decorativo no fundo */
+.hero-shape {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--bg-page);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    transform: scaleX(1.5);
+}
+
+/* --- FILTROS (STICKY E GLASS) --- */
+.filter-wrapper {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    margin: -3rem 1rem 3rem; /* Margem negativa para subir no hero */
+}
+
+.filter-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover { color: var(--primary); background: #f1f5f9; }
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* --- GRID E CARDS --- */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+}
+
+.course-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito Bouncy suave */
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0; /* Começa invisível para animação */
+    animation: fadeUp 0.6s forwards;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: #cbd5e1;
+}
+
+.card-header {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.course-card:hover .card-header img { transform: scale(1.1); }
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px; /* Badge na direita é mais moderno */
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-dark);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card-body {
+    padding: 1.75rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.course-subtitle {
+    font-size: 0.875rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.features-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.features-list li {
+    display: flex;
+    align-items: flex-start; /* Alinha no topo caso o texto quebre */
+    margin-bottom: 10px;
+    font-size: 0.925rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.check-icon {
+    color: var(--success);
+    margin-right: 12px;
+    font-size: 1.1rem;
+    margin-top: 2px; /* Ajuste fino */
+}
+
+/* --- FOOTER DO CARD --- */
+.card-footer {
+    padding: 1.5rem 1.75rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    gap: 12px;
+    background: #ffffff;
+}
+
+.btn {
+    padding: 12px;
+    border-radius: var(--radius-btn);
+    border: none;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn-whatsapp {
+    background-color: var(--success);
+    color: white;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2);
+}
+
+.btn-whatsapp:hover {
+    background-color: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(22, 163, 74, 0.3);
+}
+
+.btn-info {
+    width: 48px; /* Botão quadrado */
+    background-color: #f1f5f9;
+    color: var(--text-light);
+}
+
+.btn-info:hover {
+    background-color: #e2e8f0;
+    color: var(--primary);
+}
+
+/* --- BOTÃO FLUTUANTE --- */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    text-decoration: none;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* --- FOOTER SITE --- */
+footer {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 2rem;
+}
+
+/* --- ANIMAÇÃO --- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .hero { padding: 4rem 1rem 6rem; }
+    .hero h1 { font-size: 2rem; }
+    .filter-wrapper { top: 10px; margin: -2rem 0.5rem 2rem; }
+    .filter-container { width: 100%; overflow-x: auto; padding: 6px; justify-content: flex-start; }
+    .filter-btn { padding: 8px 16px; white-space: nowrap; font-size: 0.85rem; }
+    /* Esconde barra de rolagem no mobile */
+    .filter-container::-webkit-scrollbar { display: none; }
+}
+/* --- MODAL (POPOUT) STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6); /* Escuro transparente */
+    backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh; /* Máximo da altura da tela */
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow-y: auto; /* Scroll interno se for muito grande */
+    position: relative;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efeito elástico */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+/* Scrollbar Bonita no Modal */
+.modal-content::-webkit-scrollbar { width: 8px; }
+.modal-content::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+
+/* Botão Fechar */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f1f5f9;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 10;
+}
+.modal-close:hover { background: #e2e8f0; color: #ef4444; }
+
+/* Header do Modal */
+.modal-header {
+    padding: 2rem 2rem 1.5rem;
+    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin: 10px 0;
+}
+
+/* Caixa de Salário */
+.salary-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #ecfdf5; /* Verde bem claro */
+    border: 1px solid #a7f3d0;
+    padding: 10px 16px;
+    border-radius: 12px;
+    color: #047857;
+}
+.salary-box i { font-size: 1.5rem; }
+.salary-box small { display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; opacity: 0.8; }
+.salary-box strong { display: block; font-size: 1.1rem; }
+
+/* Corpo do Modal */
+.modal-body { padding: 2rem; }
+
+.modal-section { margin-bottom: 2rem; }
+.modal-section h3 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+}
+.section-desc { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem; }
+
+/* Grid de Oportunidades (Inspirado na sua imagem) */
+.opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.opp-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+.opp-card:hover { border-color: var(--primary); background: white; box-shadow: var(--shadow-sm); }
+.opp-icon { color: var(--primary); font-size: 1.2rem; }
+
+/* Lista de Módulos (Estilo Acordeão/Lista) */
+.modules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.module-item {
+    background: var(--accent); /* Fundo escuro conforme referência */
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    transition: transform 0.2s;
+}
+.module-item:hover { transform: translateX(5px); }
+.module-icon { color: var(--success); }
+
+.divider { border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+
+/* Footer do Modal */
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+    position: sticky;
+    bottom: 0;
+}
+
+.full-width { width: 100%; justify-content: space-between; padding: 14px 24px; font-size: 1.1rem; }
+
+/* Responsivo do Modal */
+@media (max-width: 600px) {
+    .modal-content { height: 100%; max-height: 100%; border-radius: 0; }
+    .opportunities-grid { grid-template-columns: 1fr 1fr; }
+    .modal-header h2 { font-size: 1.5rem; }
+}

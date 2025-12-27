@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Cursos Profissionais</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="tag">Transforme sua Carreira</span>
+            <h1>Catálogo de Formação Profissional</h1>
+            <p>Descubra cursos práticos que abrem portas para o mercado de trabalho. Escolha sua área e comece hoje.</p>
+        </div>
+        <div class="hero-shape"></div>
+    </header>
+
+    <div class="filter-wrapper">
+        <nav class="filter-container">
+            <button class="filter-btn active" onclick="filterCourses('todos')">Todos</button>
+            <button class="filter-btn" onclick="filterCourses('tecnologia')">Tecnologia</button>
+            <button class="filter-btn" onclick="filterCourses('gestao')">Gestão</button>
+            <button class="filter-btn" onclick="filterCourses('design')">Design</button>
+            <button class="filter-btn" onclick="filterCourses('marketing')">Marketing</button>
+            <button class="filter-btn" onclick="filterCourses('saude')">Saúde</button>
+        </nav>
+    </div>
+
+    <main class="courses-grid" id="coursesGrid"></main>
+
+    <a href="https://wa.me/seunumero" class="floating-whatsapp" target="_blank" title="Fale Conosco">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+    </a>
+
+    <footer>
+        <p>&copy; 2025 Portal de Cursos. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="courseModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn" aria-label="Fechar">
+                <i class="ph-bold ph-x"></i>
+            </button>
+            
+            <div class="modal-header">
+                <span id="modalBadge" class="tag">Categoria</span>
+                <h2 id="modalTitle">Nome do Curso</h2>
+                <div class="salary-box">
+                    <i class="ph-fill ph-currency-dollar"></i>
+                    <div>
+                        <small>Média Salarial Estimada</small>
+                        <strong id="modalSalary">R$ 2.500,00</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <section class="modal-section">
+                    <h3><i class="ph-bold ph-briefcase"></i> Oportunidades de Carreira</h3>
+                    <p class="section-desc">Profissões que você poderá seguir:</p>
+                    <div class="opportunities-grid" id="modalOpportunities">
+                        </div>
+                </section>
+
+                <hr class="divider">
+
+                <section class="modal-section">
+                    <h3><i class="ph-bold ph-book-bookmark"></i> Grade Curricular (Aulas)</h3>
+                    <div class="modules-list" id="modalModules">
+                        </div>
+                </section>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" id="modalWhatsappBtn" class="btn btn-whatsapp full-width" target="_blank">
+                    Quero garantir minha vaga
+                    <i class="ph-bold ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="dados.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
